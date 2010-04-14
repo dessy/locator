@@ -15,8 +15,6 @@ Locator.mapController = SC.ObjectController.create(
 
 	contentBinding: 'Locator.contactSearchController.results',
 
-	// mapHTML: '<html><body>this is the <b>VALUE</b> of the <b>LABEL</b></body></html>'
-
 	mapHTML: function() {
 		if (GBrowserIsCompatible()) {
 			var map = new GMap2(document.getElementById("map_canvas"));
