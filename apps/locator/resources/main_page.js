@@ -24,13 +24,18 @@ Locator.mainPage = SC.Page.design({
     }),
 
 	mapContainer: SC.ContainerView.design({
-		layout: { top: 60, left: 320, right: 20 },
+		layout: { top: 60, bottom: 5, left: 320, right: 20 },
 		backgroundColor: 'white',
-
-		contentView: SC.ListView.design({
+		
+		contentView: SC.View.design({
+			valueBinding: 'Locator.mapController.mapHTML',
+			
+			render: function(context, firstTime) {
+				context.push('<div id="map_canvas" style="width: 100%; height: 100%"></div>');
+			}
 		})
 	}),
-
+	
 	sideView: SC.View.design({
 		childViews: 'contactView searchText searchButton'.w(),
 		anchorLocation: SC.ANCHOR_TOP,
@@ -47,7 +52,7 @@ Locator.mainPage = SC.Page.design({
 		
 		contactView: SC.ScrollView.design({
 			hasHorizontalScroller: NO,
-			layout: { top: 35, left: 5, width: 290 },
+			layout: { top: 35, bottom: 5, left: 5, width: 290 },
 			backgroundColor: 'white',
 
 			contentView: SC.ListView.design({
