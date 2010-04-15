@@ -10,13 +10,13 @@ Locator.Contact.FIXTURES = [
 	{ "guid": "LarryDavid",
 	  "firstName": "Larry",
 	  "lastName": "David",
-	  "location": "LA",
+	  "location": "Los Angeles",
 	  "isRegistered": false	},
 	
 	{ "guid": "CherylDavid",
 	  "firstName": "Cheryl",
 	  "lastName": "David",
-	  "location": "LA",
+	  "location": "Los Angeles",
 	  "isRegistered": true },
 			
 	{ "guid": "JeffGreene",
@@ -40,7 +40,7 @@ Locator.Contact.FIXTURES = [
 	{ "guid": "MaryDanson",
 	  "firstName": "Mary",
 	  "lastName": "Danson",
-	  "location": "LA",
+	  "location": "Los Angeles",
 	  "isRegistered": true },
 	
 	{ "guid": "SusieGreene",
