@@ -34,7 +34,12 @@ Locator.mapController = SC.ObjectController.create(
 				bounds.extend(point)
 			}
 
-			map.setCenter(bounds.getCenter(), map.getBoundsZoomLevel(bounds));	
+			zoomLevel = map.getBoundsZoomLevel(bounds);
+			if (zoomLevel > 15) {
+				zoomLevel = 15;
+			}
+
+			map.setCenter(bounds.getCenter(), zoomLevel);	
 			map.setUIToDefault();
 		}
 	}.property('content').cacheable()
