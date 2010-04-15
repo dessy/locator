@@ -25,26 +25,16 @@ Locator.mapController = SC.ObjectController.create(
 		}
 		
 		if (GBrowserIsCompatible()) {
-			var swBounds = new GLatLng(43.6429, -79.4673, false);
-			var neBounds = new GLatLng(43.6975, -79.3060, false);
-			
-			var bounds = new GLatLngBounds(swBounds, neBounds)
-
+			var bounds = new GLatLngBounds();
 			var map = new GMap2(document.getElementById("map_canvas"));
-			map.setCenter(bounds.getCenter(), map.getBoundsZoomLevel(bounds));	
-
-			var sw = bounds.getSouthWest();
-			var ne = bounds.getNorthEast();
-			
-			var lngSpan = ne.lng() - sw.lng();
-			var latSpan = ne.lat() - sw.lat();
 			
 			for (var i = 0; i < coordinates.length; i++) {
-				var point = new GLatLng(sw.lat() + latSpan * Math.random(), 
-					sw.lng() + lngSpan * Math.random());
+				var point = new GLatLng(coordinates[i][0], coordinates[i][1], false);
 				map.addOverlay(new GMarker(point));
+				bounds.extend(point)
 			}
-			
+
+			map.setCenter(bounds.getCenter(), map.getBoundsZoomLevel(bounds));	
 			map.setUIToDefault();
 		}
 	}.property('content').cacheable()
