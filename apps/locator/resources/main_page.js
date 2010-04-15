@@ -1,24 +1,25 @@
 // ==========================================================================
 // Project:   Locator - mainPage
-// Copyright: ©2010 My Company, Inc.
 // ==========================================================================
 /*globals Locator */
 
-// This page describes the main user interface for your application.  
-sc_require('frameworks/scui/frameworks/foundation/controllers');
-
 Locator.mainPage = SC.Page.design({
 
-  // The main pane is made visible on screen as soon as your app is loaded.
-  // Add childViews to this pane for views to display immediately on page 
-  // load.
   mainPane: SC.MainPane.design({
-    childViews: 'mapContainer sideView selectedContact'.w(),
+    childViews: 'mapContainer sideView selectedContactName selectedContactLocation'.w(),
     
-	selectedContact: SC.LabelView.design({
-        layout: { top: 5, left: 320, right: 20, height: 50 },
+	selectedContactName: SC.LabelView.design({
+        layout: { top: 5, left: 320, right: 20, height: 25 },
 		anchorLocation: SC.ANCHOR_RIGHT,
-		valueBinding: 'Locator.contactController.summary',
+		valueBinding: 'Locator.contactController.name',
+		escapeHTML: NO,
+		isVisibleBinding: SC.Binding.bool('Locator.contactController.content')
+    }),
+
+	selectedContactLocation: SC.LabelView.design({
+        layout: { top: 30, left: 320, right: 20, height: 25 },
+		anchorLocation: SC.ANCHOR_RIGHT,
+		valueBinding: 'Locator.contactController.located',
 		escapeHTML: NO,
 		isVisibleBinding: SC.Binding.bool('Locator.contactController.content')
     }),

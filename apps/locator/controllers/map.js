@@ -1,6 +1,5 @@
 // ==========================================================================
 // Project:   Locator.mapController
-// Copyright: ©2010 My Company, Inc.
 // ==========================================================================
 /*globals Locator */
 
@@ -11,7 +10,7 @@
   @extends SC.ObjectController
 */
 Locator.mapController = SC.ObjectController.create(
-/** @scope Locator.mapController.prototype */ {
+{
 
 	contentBinding: 'Locator.contactSearchController.results',
 

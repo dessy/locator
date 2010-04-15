@@ -1,6 +1,5 @@
 // ==========================================================================
 // Project:   Locator.contactSearchController
-// Copyright: ©2010 My Company, Inc.
 // ==========================================================================
 /*globals Locator SCUI*/
 
@@ -12,7 +11,8 @@
 */
 
 Locator.contactSearchController = SCUI.SearchableArrayController.create(
-/** @scope Locator.contactSearchController.prototype */ {
+{
+
 	searchTerm: '',
 	
 	results: function() {
