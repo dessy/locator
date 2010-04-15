@@ -32,6 +32,7 @@ Locator.mainPage = SC.Page.design({
 			valueBinding: 'Locator.mapController.mapHTML',
 			
 			render: function(context, firstTime) {
+				// context.push('<body onload="initializeMap()" onunload="GUnload()"><div id="map_canvas" style="width: 500px; height: 300px"></div></body>');
 				context.push('<div id="map_canvas" style="width: 100%; height: 100%"></div>');
 			}
 		})
