@@ -14,27 +14,42 @@ Locator.mapController = SC.ObjectController.create(
 
 	contentBinding: 'Locator.contactSearchController.results',
 
-	locationContactMapping: {},
+	locationContactMap: {},
 
-	mapHTML: function() {
-		contacts = this.get('content').getEach('guid');
+	addMapping: function(guid, point) {
+		var mapping = this.get('locationContactMap');
+		mapping[guid] = point;
+		this.set('locationContactMap', mapping);
+	},
 
-		var coordinates = [];
-		for (var i = 0; i < contacts.length; i++) {
-			coordinates.push(this.get('locationContactMapping')[contacts[i]]);
+	changeMapMarkers: function() {
+		var contacts = this.get('content').getEach('guid');
+
+		// var currentState = '';
+		// 	for (var i = 0; i < contacts.length; i++) {
+		// 		currentState += contacts[i] + ' ' + this.get('locationContactMap')[contacts[i]] + '\n';
+		// 	}
+			// alert(currentState);
+						
+		for (var j = 0; j < contacts.length; j++) {
+			if (!this.get('locationContactMap')[contacts[j]]) {
+				return;
+			}
 		}
-		
+
 		if (GBrowserIsCompatible()) {
 			var bounds = new GLatLngBounds();
 			var map = new GMap2(document.getElementById("map_canvas"));
 			
-			for (var i = 0; i < coordinates.length; i++) {
-				var point = new GLatLng(coordinates[i][0], coordinates[i][1], false);
-				map.addOverlay(new GMarker(point));
-				bounds.extend(point)
+			for (var i = 0; i < contacts.length; i++) {
+				var point = this.get('locationContactMap')[contacts[i]];
+				if (point) {
+					map.addOverlay(new GMarker(point));
+					bounds.extend(point);
+				}
 			}
 
-			zoomLevel = map.getBoundsZoomLevel(bounds);
+			var zoomLevel = map.getBoundsZoomLevel(bounds);
 			if (zoomLevel > 15) {
 				zoomLevel = 15;
 			}
@@ -42,6 +57,10 @@ Locator.mapController = SC.ObjectController.create(
 			map.setCenter(bounds.getCenter(), zoomLevel);	
 			map.setUIToDefault();
 		}
+	},
+
+	mapHTML: function() {
+		this.changeMapMarkers();
 	}.property('content').cacheable()
 
 }) ;
