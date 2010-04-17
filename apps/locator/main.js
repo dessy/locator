@@ -4,14 +4,13 @@
 /*globals Locator */
 
 Locator.main = function main() {
-
   	Locator.getPath('mainPage.mainPane').append() ;
 	
 	var query = SC.Query.local(Locator.Contact, { orderBy: 'lastName' });
 	var contacts = Locator.store.find(query);
 
 	Locator.contactSearchController.set('content', contacts);
-		
+
 	function addAddressToMap(response) {
 	if (!response || response.Status.code != 200) {
         locationContactMap[guid] = null;

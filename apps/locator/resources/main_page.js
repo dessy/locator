@@ -39,17 +39,21 @@ Locator.mainPage = SC.Page.design({
 	}),
 	
 	sideView: SC.View.design({
-		childViews: 'contactView searchText searchButton'.w(),
+		childViews: 'contactView searchText searchBy'.w(),
 		anchorLocation: SC.ANCHOR_TOP,
 		
 		searchText: SC.TextFieldView.design({
-			layout: { top: 5, left: 5, width: 210, height: 25 },
+			layout: { top: 5, left: 5, width: 180, height: 25 },
 			valueBinding: 'Locator.contactSearchController.searchTerm'
 		}),
 
-		searchButton: SC.ButtonView.design({
-			layout: { top: 5, left: 220, width: 80 },
-			title: 'Search'
+		searchBy: SC.SelectFieldView.design({
+			layout: { top: 5, left: 190, width: 110, height: 25 },
+			nameKey: 'name',
+			valueKey: 'value',
+			disableSort: YES,
+			objects: Locator.contactSearchController.getSearchConditions(),
+			fieldValueBinding: 'Locator.contactSearchController.searchCondition'
 		}),
 		
 		contactView: SC.ScrollView.design({
