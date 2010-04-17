@@ -47,6 +47,23 @@ Locator.Contact.FIXTURES = [
 	  "firstName": "Susie",
 	  "lastName": "Greene",
 	  "location": "New York",
+	  "isRegistered": true },
+	
+	{ "guid": "JerrySeinfeld",
+	  "firstName": "Jerry",
+	  "lastName": "Seinfeld",
+	  "location": "Chicago",
+	  "isRegistered": false },
+	
+	{ "guid": "JuliaLouisDreyfus",
+	  "firstName": "Julia",
+	  "lastName": "Louis-Dreyfus",
+	  "location": "Seattle",
+	  "isRegistered": true },
+	
+	{ "guid": "JasonAlexander",
+	  "firstName": "Jason",
+	  "lastName": "Alexander",
+	  "location": "Denver",
 	  "isRegistered": true }
-
 ];

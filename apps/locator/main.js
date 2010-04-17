@@ -11,42 +11,35 @@ Locator.main = function main() {
 	var contacts = Locator.store.find(query);
 
 	Locator.contactSearchController.set('content', contacts);
-	
-	// for (var i = 0; i < contacts.get('length'); i++) {
-	// 	var guid = contacts.objectAt(i).get('guid');
-	// 	var located = contacts.objectAt(i).get('location');
-	// 
-	// 	var geocoder = new GClientGeocoder();
-	// 	geocoder.getLatLng(
-	// 		located,
-	// 	    function(point) {
-	// 	    	if (!point) {
-	// 				// locationContactMap[guid] = null;
-	// 	      	} else {
-	// 				alert(guid + ' ' + point);
-	// 				// Locator.mapController.addMapping(guid, point);
-	// 				// Locator.mapController.changeMapMarkers();
-	// 			}
-	// 	    }
-	// 	  );
-	// }
+		
+	function addAddressToMap(response) {
+	if (!response || response.Status.code != 200) {
+        locationContactMap[guid] = null;
+      } else {
+        place = response.Placemark[0];
+        point = new GLatLng(place.Point.coordinates[1],
+        place.Point.coordinates[0]);
+		
+		var query = SC.Query.local(Locator.Contact, { conditions: "location CONTAINS '" + response.name + "'" });
+		var matches = Locator.store.find(query);
+		
+		for (var i = 0; i < matches.get('length'); i++) {
+			Locator.mapController.addMapping(matches.objectAt(i).get('guid'), point);
+		}
+		Locator.mapController.changeMapMarkers();
+      }
+    }
 
-	var ptLA = new GLatLng(34.0522342, -118.2436849);
-	var ptNY = new GLatLng(40.7142691, -74.0059729);
-	var ptSF = new GLatLng(37.7749295, -122.4194155);
+	for (var i = 0; i < contacts.get('length'); i++) {
+		var guid = contacts.objectAt(i).get('guid');
+		var located = contacts.objectAt(i).get('location');
 
-	var mapping = {};
-	mapping['LarryDavid'] = ptLA;
-	mapping['CherylDavid'] = ptLA;
-	mapping['JeffGreene'] = ptNY;
-	mapping['RichardLewis'] = ptNY;
-	mapping['TedDanson'] = ptSF;
-	mapping['MaryDanson'] = ptLA;
-	mapping['SusieGreene'] = ptNY;
-	
-	Locator.mapController.set('locationContactMap', mapping);
-	
-	
+		var mappings = Locator.mapController.get('locationContactMap');
+		if (!mappings[guid]) {
+			var geocoder = new GClientGeocoder();
+			geocoder.getLocations(located, addAddressToMap);			
+		}
+	}
 	
 } ;
 

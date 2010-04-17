@@ -25,12 +25,6 @@ Locator.mapController = SC.ObjectController.create(
 	changeMapMarkers: function() {
 		var contacts = this.get('content').getEach('guid');
 
-		// var currentState = '';
-		// 	for (var i = 0; i < contacts.length; i++) {
-		// 		currentState += contacts[i] + ' ' + this.get('locationContactMap')[contacts[i]] + '\n';
-		// 	}
-			// alert(currentState);
-						
 		for (var j = 0; j < contacts.length; j++) {
 			if (!this.get('locationContactMap')[contacts[j]]) {
 				return;
