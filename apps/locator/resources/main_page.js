@@ -37,16 +37,17 @@ Locator.mainPage = SC.Page.design({
 			}
 		})
 	}),
-	
+
 	sideView: SC.View.design({
-		childViews: 'contactView searchText searchBy'.w(),
+		childViews: 'contactView searchContainer searchBy'.w(),
 		anchorLocation: SC.ANCHOR_TOP,
 		
-		searchText: SC.TextFieldView.design({
+		searchContainer: SC.ContainerView.design({
 			layout: { top: 5, left: 5, width: 180, height: 25 },
-			valueBinding: 'Locator.contactSearchController.searchTerm'
+			nowShowing: 'Locator.mainPage.searchPane.searchText'
+			// nowShowing: 'Locator.mainPage.searchPane.searchRadio'
 		}),
-
+		
 		searchBy: SC.SelectFieldView.design({
 			layout: { top: 5, left: 190, width: 110, height: 25 },
 			nameKey: 'name',
@@ -77,6 +78,26 @@ Locator.mainPage = SC.Page.design({
 				})
 			})
 		})		
+	})
+
+  }),
+
+  searchPane: SC.Pane.design({
+    childViews: 'searchText searchRadio'.w(),
+
+	searchText: SC.TextFieldView.design({
+		valueBinding: 'Locator.contactSearchController.searchTerm'
+	}),
+	
+	searchRadio: SC.RadioView.design({
+	    items: [{ title: "True", 
+	              value: "true" },
+	            { title: "False", 
+	              value: "false" }],
+	    value: 'true',
+	    itemTitleKey: 'title',
+	    itemValueKey: 'value',
+	    layoutDirection: SC.LAYOUT_HORIZONTAL
 	})
 
   })
