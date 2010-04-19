@@ -17,6 +17,15 @@ Locator.contactSearchController = SCUI.SearchableArrayController.create(
 
 	searchTerm: '',
 	
+	searchContainerValue: function() {
+		var containerValue = 'Locator.mainPage.searchPane.searchText';
+		if (this.get('searchCondition') && this.get('searchCondition')[1] == 'Boolean') {
+			containerValue = 'Locator.mainPage.searchPane.searchRadio';
+		}
+		
+		return containerValue;
+	}.property('searchCondition').cacheable(),
+	
 	results: function() {
 		var type = 'String';
 		var conditionString = "firstName CONTAINS '" + this.get('searchTerm') + "'";

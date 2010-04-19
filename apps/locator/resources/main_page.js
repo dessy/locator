@@ -44,8 +44,7 @@ Locator.mainPage = SC.Page.design({
 		
 		searchContainer: SC.ContainerView.design({
 			layout: { top: 5, left: 5, width: 180, height: 25 },
-			nowShowing: 'Locator.mainPage.searchPane.searchText'
-			// nowShowing: 'Locator.mainPage.searchPane.searchRadio'
+			nowShowingBinding: 'Locator.contactSearchController.searchContainerValue'
 		}),
 		
 		searchBy: SC.SelectFieldView.design({
@@ -94,9 +93,9 @@ Locator.mainPage = SC.Page.design({
 	              value: "true" },
 	            { title: "False", 
 	              value: "false" }],
-	    value: 'true',
 	    itemTitleKey: 'title',
 	    itemValueKey: 'value',
+		valueBinding: 'Locator.contactSearchController.searchTerm',
 	    layoutDirection: SC.LAYOUT_HORIZONTAL
 	})
 
