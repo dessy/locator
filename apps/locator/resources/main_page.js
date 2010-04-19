@@ -6,7 +6,7 @@
 Locator.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
-    childViews: 'mapContainer sideView selectedContactName selectedContactLocation'.w(),
+    childViews: 'mapView sideView selectedContactName selectedContactLocation'.w(),
     
 	selectedContactName: SC.LabelView.design({
         layout: { top: 5, left: 320, right: 20, height: 25 },
@@ -24,18 +24,16 @@ Locator.mainPage = SC.Page.design({
 		isVisibleBinding: SC.Binding.bool('Locator.contactController.content')
     }),
 
-	mapContainer: SC.ContainerView.design({
+	mapView: SC.View.design({
 		layout: { top: 60, bottom: 5, left: 320, right: 20 },
 		backgroundColor: 'white',
+		valueBinding: 'Locator.mapController.mapHTML',
+		escapeHTML: NO, 
 		
-		contentView: SC.View.design({
-			valueBinding: 'Locator.mapController.mapHTML',
-			
-			render: function(context, firstTime) {
-				// context.push('<body onload="initializeMap()" onunload="GUnload()"><div id="map_canvas" style="width: 500px; height: 300px"></div></body>');
-				context.push('<div id="map_canvas" style="width: 100%; height: 100%"></div>');
-			}
-		})
+		render: function(context, firstTime) {
+			// context.push('<body onload="initializeMap()" onunload="GUnload()"><div id="map_canvas" style="width: 500px; height: 300px"></div></body>');
+			context.push('<div id="map_canvas" style="width: 100%; height: 100%"></div>');
+		}
 	}),
 
 	sideView: SC.View.design({

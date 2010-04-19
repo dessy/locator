@@ -39,6 +39,10 @@ Locator.mapController = SC.ObjectController.create(
 		 markerOptions = { icon:letteredIcon };
 		 var marker = new GMarker(point, markerOptions);
 
+		 GEvent.addListener(marker, "click", function() {
+		   marker.openInfoWindowHtml("Marker <b>" + letter + "</b>");
+		 });
+		
 		 return marker;
 	},
 
