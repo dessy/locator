@@ -22,6 +22,26 @@ Locator.mapController = SC.ObjectController.create(
 		this.set('locationContactMap', mapping);
 	},
 
+	createMarker: function(point, index) {
+		var baseIcon = new GIcon(G_DEFAULT_ICON);
+		baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+		baseIcon.iconSize = new GSize(20, 34);
+		baseIcon.shadowSize = new GSize(37, 34);
+		baseIcon.iconAnchor = new GPoint(9, 34);
+		baseIcon.infoWindowAnchor = new GPoint(9, 2);
+		
+		// Create a lettered icon for this point using our icon class
+		 var letter = String.fromCharCode("A".charCodeAt(0) + index);
+		 var letteredIcon = new GIcon(baseIcon);
+		 letteredIcon.image = "http://www.google.com/mapfiles/marker" + letter + ".png";
+
+		 // Set up our GMarkerOptions object
+		 markerOptions = { icon:letteredIcon };
+		 var marker = new GMarker(point, markerOptions);
+
+		 return marker;
+	},
+
 	changeMapMarkers: function() {
 		var contacts = this.get('content').getEach('guid');
 
@@ -38,7 +58,11 @@ Locator.mapController = SC.ObjectController.create(
 			for (var i = 0; i < contacts.length; i++) {
 				var point = this.get('locationContactMap')[contacts[i]];
 				if (point) {
-					map.addOverlay(new GMarker(point));
+					var icon = new GIcon(G_DEFAULT_ICON);
+					markerOptions = { icon:icon };
+					var marker = new GMarker(point, markerOptions);
+
+					map.addOverlay(this.createMarker(point, i));
 					bounds.extend(point);
 				}
 			}
