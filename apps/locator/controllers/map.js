@@ -58,7 +58,6 @@ Locator.mapController = SC.ObjectController.create(
 		if (GBrowserIsCompatible()) {
 			var bounds = new GLatLngBounds();
 			var map = new GMap2(document.getElementById("map_canvas"));
-			
 			for (var i = 0; i < contacts.length; i++) {
 				var point = this.get('locationContactMap')[contacts[i]];
 				if (point) {
