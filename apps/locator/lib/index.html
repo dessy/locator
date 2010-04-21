@@ -94,6 +94,16 @@ SC.setupBodyClassNames = function() {
   el.className = classNames.join(' ') ;
 } ;
 
+SC.forEach = function(array, action) {
+ 	for (var i = 0; i < array.length; i++)
+		action(array[i]); 
+} ;
+
+SC.forEachRecord = function(array, action) {
+ 	for (var i = 0; i < array.get('length'); i++)
+		action(array.objectAt(i)); 
+} ;
+
 /* >>>>>>>>>> BEGIN bundle_loaded.js */
 ; if ((typeof SC !== 'undefined') && SC && SC.bundleDidLoad) SC.bundleDidLoad('sproutcore/bootstrap');
 

@@ -11,17 +11,17 @@ Locator.main = function main() {
 	var contacts = Locator.store.find(query);
 
 	Locator.contactSearchController.set('content', contacts);
-
-	for (var i = 0; i < contacts.get('length'); i++) {
-		var guid = contacts.objectAt(i).get('guid');
-		var located = contacts.objectAt(i).get('location');
+	
+	SC.forEachRecord(contacts, function(contact) {
+		var guid = contact.get('guid');
+		var located = contact.get('location');
 
 		var mappings = Locator.mapController.get('locationContactMap');
 		if (!mappings[guid]) {
 			var geocoder = new GClientGeocoder();
 			geocoder.getLocations(located, addAddressToMap);			
 		}
-	}
+	});
 	
 } ;
 
@@ -35,9 +35,10 @@ function addAddressToMap(response) {
 		var matchQuery = SC.Query.local(Locator.Contact, { conditions: "location = '" + response.name + "'" });
 		var matches = Locator.store.find(matchQuery);
 	
-		for (var i = 0; i < matches.get('length'); i++) {
-			Locator.mapController.addMapping(matches.objectAt(i).get('guid'), point);
-		}
+		SC.forEachRecord(matches, function(match) {
+			Locator.mapController.addMapping(match.get('guid'), point);
+		});
+
 		Locator.mapController.changeMapMarkers();
     }
 }
