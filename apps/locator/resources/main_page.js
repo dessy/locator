@@ -61,7 +61,6 @@ Locator.mainPage = SC.Page.design({
 			contentView: SC.ListView.design({
 				contentBinding: 'Locator.contactSearchController.results',
 				selectionBinding: 'Locator.contactSearchController.selection',
-				// contentValueKey: 'firstName',
 				
 				exampleView: SC.View.design(SC.Control, {
 					render: function(context, firstTime) {

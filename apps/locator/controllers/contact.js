@@ -24,13 +24,6 @@ Locator.contactController = SC.ObjectController.create(
 	located: function() {
 		var location = "Location: " + this.get('location');
 		return location;
-	}.property('content').cacheable(),
-		
-	summary: function() {
-		var info = 'Name: ' + this.get('firstName') + ' ' + this.get('lastName');
-		info += "\nLocation: " + this.get('location');
-		
-		return info;
 	}.property('content').cacheable()
-	
+			
 }) ;
