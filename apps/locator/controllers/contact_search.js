@@ -41,9 +41,9 @@ Locator.contactSearchController = SCUI.SearchableArrayController.create(
 		}
 		
 		var query = SC.Query.local(Locator.Contact, { conditions: conditionString, orderBy: 'lastName' });
-		var allContacts = Locator.store.find(query);
+		var contacts = Locator.store.find(query);
 		
-		return allContacts;
+		return contacts;
 	}.property('searchTerm').cacheable(),
 	
 	getSearchConditions: function() {
